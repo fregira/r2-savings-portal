@@ -13,7 +13,7 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #000000 0%, #333333 100%);
             min-height: 100vh;
         }
 
@@ -42,7 +42,7 @@
         }
 
         .logo h1 {
-            color: #4facfe;
+            color: #fcbf01;
             font-size: 1.5em;
             font-weight: 700;
         }
@@ -116,8 +116,8 @@
 
         input:focus, textarea:focus {
             outline: none;
-            border-color: #4facfe;
-            box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);
+            border-color: #fcbf01;
+            box-shadow: 0 0 0 3px rgba(252, 191, 1, 0.1);
         }
 
         textarea {
@@ -128,8 +128,8 @@
         .btn {
             width: 100%;
             padding: 12px;
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            color: white;
+            background: linear-gradient(135deg, #fcbf01 0%, #f39c12 100%);
+            color: #000000;
             border: none;
             border-radius: 10px;
             font-size: 1em;
@@ -140,7 +140,7 @@
 
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
+            box-shadow: 0 8px 25px rgba(252, 191, 1, 0.4);
         }
 
         .dashboard {
@@ -162,12 +162,12 @@
         }
 
         .balance-card {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            color: white;
+            background: linear-gradient(135deg, #fcbf01 0%, #f39c12 100%);
+            color: #000000;
             padding: 30px;
             border-radius: 20px;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(79, 172, 254, 0.3);
+            box-shadow: 0 10px 30px rgba(252, 191, 1, 0.3);
         }
 
         .balance-amount {
@@ -182,12 +182,13 @@
         }
 
         .vesting-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #000000 0%, #333333 100%);
             color: white;
             padding: 30px;
             border-radius: 20px;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 2px solid #fcbf01;
         }
 
         .vesting-progress {
@@ -202,7 +203,7 @@
         }
 
         .progress-fill {
-            background: white;
+            background: #fcbf01;
             height: 100%;
             border-radius: 10px;
             transition: width 0.5s ease;
@@ -221,13 +222,13 @@
             border-radius: 15px;
             text-align: center;
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            border-left: 4px solid #4facfe;
+            border-left: 4px solid #fcbf01;
         }
 
         .stat-number {
             font-size: 2em;
             font-weight: 700;
-            color: #4facfe;
+            color: #fcbf01;
             margin-bottom: 5px;
         }
 
@@ -296,13 +297,13 @@
         }
 
         .transaction-icon.growth {
-            background: #cce5ff;
-            color: #004085;
+            background: #fff3cd;
+            color: #856404;
         }
 
         .transaction-icon.contribution {
-            background: #e7f3ff;
-            color: #0066cc;
+            background: #fcbf01;
+            color: #000000;
         }
 
         .transaction-info h4 {
@@ -390,17 +391,18 @@
         }
 
         .btn-secondary {
-            background: #6c757d;
+            background: #333333;
             color: white;
-            border: none;
+            border: 2px solid #fcbf01;
             padding: 10px 20px;
             border-radius: 8px;
             cursor: pointer;
-            transition: background 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .btn-secondary:hover {
-            background: #5a6268;
+            background: #fcbf01;
+            color: #000000;
         }
 
         .modal {
@@ -448,13 +450,13 @@
         }
 
         .disclaimer {
-            background: #fff3cd;
-            border: 1px solid #ffeaa7;
+            background: #333333;
+            border: 1px solid #fcbf01;
             border-radius: 10px;
             padding: 15px;
             margin: 20px 0;
             font-size: 0.9em;
-            color: #856404;
+            color: #ffffff;
         }
 
         .alert {
@@ -504,7 +506,8 @@
     <div class="header">
         <div class="header-content">
             <div class="logo">
-                <h1>💰 R2 Solutions</h1>
+                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiNmY2JmMDEiLz4KPHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMTYiIGZpbGw9IiNmY2JmMDEiLz4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMTIiIGZpbGw9IiNmZmZmZmYiLz4KPC9zdmc+Cjwvc3ZnPgo=" alt="R2 Solutions" style="width: 32px; height: 32px;">
+                <h1>R2 SOLUTIONS</h1>
             </div>
             <div class="user-info" id="userInfo" style="display: none;">
                 <span>Welcome, <strong id="userName"></strong></span>
