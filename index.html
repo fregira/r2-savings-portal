@@ -1,221 +1,1053 @@
-# 📧 R2 Solutions Email Templates
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R2 Solutions - Savings Account Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-## 1. Welcome & Account Setup Email
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
 
-**Subject:** 🎉 Your R2 Solutions Savings Account is Ready! Login Details Inside
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 30px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
----
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-**Email Content:**
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-Dear [CLIENT_NAME],
+        .logo h1 {
+            color: #4facfe;
+            font-size: 1.5em;
+            font-weight: 700;
+        }
 
-Congratulations! You've successfully completed 120 days at ResultsCX, and your exclusive R2 Solutions savings account is now active.
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 0.9em;
+            color: #666;
+        }
 
-**🔐 Your Account Details:**
-- Account Number: [ACCOUNT_NUMBER]  
-- Password: [PASSWORD]
-- Portal: https://yourusername.github.io/r2-savings-portal
+        .logout-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background 0.3s ease;
+        }
 
-**💰 Account Summary:**
-- Initial Deposit: ₱2,000 (credited today)
-- Target Monthly Growth: 2.5%*
-- Vesting Period: 2 years from today
-- Projected Value at Vesting: ₱10,900+*
+        .logout-btn:hover {
+            background: #c82333;
+        }
 
-**📱 How to Access Your Account:**
-1. Visit the savings portal link above
-2. Enter your account number and password
-3. Monitor your balance and growth monthly
-4. Download statements anytime
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
 
-**🎯 What's Next:**
-- Your account will grow monthly (targeting 2.5%)*
-- Monthly statements will be emailed to you
-- You can add additional contributions anytime
-- Contact us for questions: reliable.resource.02@gmail.com
+        .login-form {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+        }
 
-*Investment returns are projections only, not guaranteed, and may vary.
+        .login-form h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+            font-size: 1.8em;
+        }
 
-Best regards,  
-R2 Solutions Team  
-reliable.resource.02@gmail.com
+        .form-group {
+            margin-bottom: 20px;
+        }
 
----
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
 
-## 2. Monthly Statement Email
+        input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
 
-**Subject:** 📊 Your R2 Solutions Monthly Statement - [MONTH YEAR]
+        input:focus {
+            outline: none;
+            border-color: #4facfe;
+            box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);
+        }
 
----
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
 
-**Email Content:**
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
+        }
 
-Dear [CLIENT_NAME],
+        .dashboard {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px;
+            display: none;
+        }
 
-Your monthly savings account statement is ready for review.
+        .dashboard.active {
+            display: block;
+        }
 
-**📈 Account Performance - [MONTH YEAR]:**
-- Previous Balance: ₱[PREVIOUS_BALANCE]
-- Monthly Growth: ₱[MONTHLY_GROWTH] ([GROWTH_PERCENTAGE]%)
-- Current Balance: ₱[CURRENT_BALANCE]
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
 
-**⏱️ Vesting Progress:**
-- Months Completed: [MONTHS_COMPLETED] of 24
-- Months Remaining: [MONTHS_REMAINING]
-- Projected Vested Amount: ₱[PROJECTED_AMOUNT]*
+        .balance-card {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(79, 172, 254, 0.3);
+        }
 
-**📋 Recent Transactions:**
-[TRANSACTION_LIST]
+        .balance-amount {
+            font-size: 3em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
 
-**💡 Account Actions Available:**
-- Add additional contributions (immediately accessible)
-- Download detailed statements
-- Contact support for questions
+        .balance-label {
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
 
-Login to your account: https://yourusername.github.io/r2-savings-portal
+        .vesting-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .vesting-progress {
+            margin: 20px 0;
+        }
+
+        .progress-bar {
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            height: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: white;
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border-left: 4px solid #4facfe;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: 700;
+            color: #4facfe;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .transactions-section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .transaction-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.3s ease;
+        }
+
+        .transaction-item:hover {
+            background: #f8f9fa;
+        }
+
+        .transaction-item:last-child {
+            border-bottom: none;
+        }
+
+        .transaction-details {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .transaction-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+        }
+
+        .transaction-icon.deposit {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .transaction-icon.growth {
+            background: #cce5ff;
+            color: #004085;
+        }
+
+        .transaction-icon.fee {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .transaction-info h4 {
+            margin-bottom: 3px;
+            color: #333;
+        }
+
+        .transaction-info p {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .transaction-amount {
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        .transaction-amount.positive {
+            color: #28a745;
+        }
+
+        .transaction-amount.negative {
+            color: #dc3545;
+        }
+
+        .charts-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .chart-card {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .chart-placeholder {
+            height: 200px;
+            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-style: italic;
+        }
+
+        .actions-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .action-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .action-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .action-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .action-card h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .action-card p {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .disclaimer {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+            font-size: 0.9em;
+            color: #856404;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .charts-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .user-info {
+                text-align: center;
+            }
+            
+            .balance-amount {
+                font-size: 2.5em;
+            }
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">
+                <h1>💰 R2 Solutions</h1>
+            </div>
+
+    <!-- Withdrawal Request Modal -->
+    <div class="modal" id="withdrawalModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>💸 Withdrawal Request</h3>
+                <button class="close-btn" onclick="closeModal('withdrawalModal')">&times;</button>
+            </div>
+            <div id="withdrawalInfo">
+                <div style="background: #e7f3ff; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+                    <h4>Available for Withdrawal:</h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px;">
+                        <div>
+                            <strong>Additional Contributions:</strong><br>
+                            <span style="color: #28a745; font-size: 1.2em;">₱<span id="availableContributions">0</span></span>
+                        </div>
+                        <div>
+                            <strong>Vested Base + Earnings:</strong><br>
+                            <span style="color: #6c757d; font-size: 1.2em;" id="vestedAmount">₱0 (Not vested yet)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <form id="withdrawalForm">
+                    <div class="form-group">
+                        <label for="withdrawalAmount">Withdrawal Amount</label>
+                        <input type="number" id="withdrawalAmount" placeholder="Enter amount" min="100" required>
+                        <small style="color: #666;">Minimum withdrawal: ₱100</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="withdrawalReason">Reason for Withdrawal (Optional)</label>
+                        <textarea id="withdrawalReason" placeholder="Emergency, investment, etc." rows="3"></textarea>
+                    </div>
+                    
+                    <div class="disclaimer">
+                        <p><strong>Important Notes:</strong></p>
+                        <ul style="margin-left: 20px; margin-top: 5px;">
+                            <li>Only additional contributions and vested amounts can be withdrawn</li>
+                            <li>Base ₱2,000 + earnings are locked until 2-year vesting period</li>
+                            <li>Withdrawal requests processed within 3-5 business days</li>
+                            <li>You'll receive email confirmation once approved</li>
+                        </ul>
+                    </div>
+                    
+                    <button type="submit" class="btn">Submit Withdrawal Request</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Support Modal -->
+    <div class="modal" id="supportModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>📞 Contact Support</h3>
+                <button class="close-btn" onclick="closeModal('supportModal')">&times;</button>
+            </div>
+            <div style="text-align: center;">
+                <p style="margin-bottom: 20px;">Need help with your R2 Solutions savings account?</p>
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                    <h4>📧 Email Support</h4>
+                    <p><strong>reliable.resource.02@gmail.com</strong></p>
+                    <p style="font-size: 0.9em; color: #666;">Response within 24 hours</p>
+                </div>
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
+                    <h4>⏰ Business Hours</h4>
+                    <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
+                    <p style="font-size: 0.9em; color: #666;">Philippine Standard Time</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Support Action Card -->
+    <div style="display: none;">
+        <div class="action-card">
+            <div class="action-icon">📞</div>
+            <h3>Contact Support</h3>
+            <p>Get help with your account or have questions answered</p>
+            <button class="btn-secondary" onclick="openModal('supportModal')">Contact Us</button>
+        </div>
+    </div>
+            <div class="user-info" id="userInfo" style="display: none;">
+                <span>Welcome, <strong id="userName"></strong></span>
+                <span>|</span>
+                <span>Account: <strong id="accountNumber"></strong></span>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Form -->
+    <div class="login-container" id="loginContainer">
+        <div class="login-form">
+            <h2>🔐 Account Login</h2>
+            <div id="loginAlert"></div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="accountNumber">Account Number</label>
+                    <input type="text" id="accountNumberInput" placeholder="Enter your account number" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="passwordInput" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn">Login</button>
+            </form>
+            <div class="disclaimer">
+                <p><strong>⚠️ Demo Accounts:</strong></p>
+                <p>Account: R2-2024-001 | Password: demo123</p>
+                <p>Account: R2-2024-002 | Password: maria2024</p>
+                <p>Account: R2-2024-003 | Password: carlo123</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div class="dashboard" id="dashboard">
+        <!-- Main Balance & Vesting Cards -->
+        <div class="dashboard-grid">
+            <div class="balance-card">
+                <div class="balance-amount" id="currentBalance">₱2,456</div>
+                <div class="balance-label">Current Balance</div>
+                <div style="margin-top: 15px; font-size: 0.9em; opacity: 0.9;">
+                    Monthly Growth: <span id="monthlyGrowth">+₱54</span>
+                </div>
+            </div>
+
+            <div class="vesting-card">
+                <h3>Vesting Progress</h3>
+                <div class="vesting-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="vestingProgress" style="width: 22.8%;"></div>
+                    </div>
+                    <div style="margin-top: 10px;">
+                        <span id="vestingMonths">5.5</span> of 24 months completed
+                    </div>
+                </div>
+                <div style="margin-top: 15px;">
+                    <strong>Projected at Vesting: ₱10,900</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">₱2,000</div>
+                <div class="stat-label">Initial Deposit</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalGrowth">₱456</div>
+                <div class="stat-label">Total Growth</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="additionalContributions">₱0</div>
+                <div class="stat-label">Additional Contributions</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="managementFees">₱0</div>
+                <div class="stat-label">Management Fees</div>
+            </div>
+        </div>
+
+        <!-- Transaction History -->
+        <div class="transactions-section">
+            <div class="section-header">
+                <h3 class="section-title">📊 Transaction History</h3>
+                <button class="btn-secondary" onclick="downloadStatement()">Download Statement</button>
+            </div>
+            <div id="transactionList">
+                <div class="transaction-item">
+                    <div class="transaction-details">
+                        <div class="transaction-icon deposit">💰</div>
+                        <div class="transaction-info">
+                            <h4>Initial Deposit</h4>
+                            <p>June 15, 2024 • R2 Solutions</p>
+                        </div>
+                    </div>
+                    <div class="transaction-amount positive">+₱2,000.00</div>
+                </div>
+                <div class="transaction-item">
+                    <div class="transaction-details">
+                        <div class="transaction-icon growth">📈</div>
+                        <div class="transaction-info">
+                            <h4>Monthly Growth</h4>
+                            <p>November 30, 2024 • 2.3% return</p>
+                        </div>
+                    </div>
+                    <div class="transaction-amount positive">+₱54.32</div>
+                </div>
+                <div class="transaction-item">
+                    <div class="transaction-details">
+                        <div class="transaction-icon growth">📈</div>
+                        <div class="transaction-info">
+                            <h4>Monthly Growth</h4>
+                            <p>October 31, 2024 • 2.1% return</p>
+                        </div>
+                    </div>
+                    <div class="transaction-amount positive">+₱48.90</div>
+                </div>
+                <div class="transaction-item">
+                    <div class="transaction-details">
+                        <div class="transaction-icon growth">📈</div>
+                        <div class="transaction-info">
+                            <h4>Monthly Growth</h4>
+                            <p>September 30, 2024 • 2.7% return</p>
+                        </div>
+                    </div>
+                    <div class="transaction-amount positive">+₱61.15</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="charts-section">
+            <div class="chart-card">
+                <h3>Balance Growth Over Time</h3>
+                <div class="chart-placeholder">
+                    Interactive chart will be displayed here
+                </div>
+            </div>
+            <div class="chart-card">
+                <h3>Monthly Returns</h3>
+                <div class="chart-placeholder">
+                    Monthly performance chart
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Cards -->
+        <div class="actions-section">
+            <div class="action-card">
+                <div class="action-icon">💵</div>
+                <h3>Add Contribution</h3>
+                <p>Make additional contributions to grow your savings faster</p>
+                <button class="btn-secondary" onclick="openModal('contributionModal')">Add Funds</button>
+            </div>
+            <div class="action-card">
+                <div class="action-icon">📧</div>
+                <h3>Monthly Statement</h3>
+                <p>Download your detailed monthly account statement</p>
+                <button class="btn-secondary" onclick="downloadStatement()">Download</button>
+            </div>
+            <div class="action-card">
+                <div class="action-icon">💸</div>
+                <h3>Withdrawal Request</h3>
+                <p>Request withdrawal of your additional contributions (vested funds only)</p>
+                <button class="btn-secondary" onclick="openModal('withdrawalModal')">Request Withdrawal</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contribution Modal -->
+    <div class="modal" id="contributionModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>💵 Add Contribution</h3>
+                <button class="close-btn" onclick="closeModal('contributionModal')">&times;</button>
+            </div>
+            <form id="contributionForm">
+                <div class="form-group">
+                    <label for="contributionAmount">Contribution Amount</label>
+                    <input type="number" id="contributionAmount" placeholder="Enter amount" min="100" required>
+                </div>
+                <div class="disclaimer">
+                    <p><strong>Note:</strong> Additional contributions are immediately accessible and not subject to the 2-year vesting period. Only the base ₱2,000 + its earnings are vested.</p>
+                </div>
+                <button type="submit" class="btn">Add Contribution</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Support Modal -->
+    <div class="modal" id="supportModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>📞 Contact Support</h3>
+                <button class="close-btn" onclick="closeModal('supportModal')">&times;</button>
+            </div>
+            <div style="text-align: center;">
+                <p style="margin-bottom: 20px;">Need help with your R2 Solutions savings account?</p>
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                    <h4>📧 Email Support</h4>
+                    <p><strong>reliable.resource.02@gmail.com</strong></p>
+                    <p style="font-size: 0.9em; color: #666;">Response within 24 hours</p>
+                </div>
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
+                    <h4>⏰ Business Hours</h4>
+                    <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
+                    <p style="font-size: 0.9em; color: #666;">Philippine Standard Time</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Client accounts database
+        const clientAccounts = {
+            'R2-2024-001': {
+                password: 'demo123',
+                userName: 'Juan dela Cruz',
+                email: 'juan.delacruz@email.com',
+                resultsCXStartDate: '2024-06-15',
+                savingsStartDate: '2024-10-15', // After 120 days
+                currentBalance: 2456.37,
+                initialDeposit: 2000,
+                totalGrowth: 456.37,
+                additionalContributions: 0,
+                managementFees: 0,
+                vestingMonths: 5.5,
+                isVested: false,
+                transactions: [
+                    { date: '2024-10-15', type: 'deposit', description: 'Initial Deposit', amount: 2000, balance: 2000 },
+                    { date: '2024-10-31', type: 'growth', description: 'Monthly Growth (2.1%)', amount: 42.00, balance: 2042.00 },
+                    { date: '2024-11-30', type: 'growth', description: 'Monthly Growth (2.3%)', amount: 46.97, balance: 2088.97 },
+                    { date: '2024-12-31', type: 'growth', description: 'Monthly Growth (2.7%)', amount: 56.40, balance: 2145.37 }
+                ]
+            },
+            'R2-2024-002': {
+                password: 'maria2024',
+                userName: 'Maria Santos',
+                email: 'maria.santos@email.com',
+                resultsCXStartDate: '2024-07-01',
+                savingsStartDate: '2024-11-01',
+                currentBalance: 2150.30,
+                initialDeposit: 2000,
+                totalGrowth: 150.30,
+                additionalContributions: 0,
+                managementFees: 0,
+                vestingMonths: 3.0,
+                isVested: false,
+                transactions: [
+                    { date: '2024-11-01', type: 'deposit', description: 'Initial Deposit', amount: 2000, balance: 2000 },
+                    { date: '2024-11-30', type: 'growth', description: 'Monthly Growth (2.2%)', amount: 44.00, balance: 2044.00 },
+                    { date: '2024-12-31', type: 'growth', description: 'Monthly Growth (2.6%)', amount: 53.14, balance: 2097.14 }
+                ]
+            },
+            'R2-2024-003': {
+                password: 'carlo123',
+                userName: 'Carlo Reyes',
+                email: 'carlo.reyes@email.com',
+                resultsCXStartDate: '2024-08-15',
+                savingsStartDate: '2024-12-15',
+                currentBalance: 2048.50,
+                initialDeposit: 2000,
+                totalGrowth: 48.50,
+                additionalContributions: 0,
+                managementFees: 0,
+                vestingMonths: 1.5,
+                isVested: false,
+                transactions: [
+                    { date: '2024-12-15', type: 'deposit', description: 'Initial Deposit', amount: 2000, balance: 2000 },
+                    { date: '2024-12-31', type: 'growth', description: 'Monthly Growth (2.4%)', amount: 48.50, balance: 2048.50 }
+                ]
+            }
+        };
+
+        let currentAccount = null;
+
+        // Login functionality
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const accountNumber = document.getElementById('accountNumberInput').value;
+            const password = document.getElementById('passwordInput').value;
+            const alertContainer = document.getElementById('loginAlert');
+            
+            // Check if account exists and password matches
+            if (clientAccounts[accountNumber] && clientAccounts[accountNumber].password === password) {
+                // Successful login
+                currentAccount = clientAccounts[accountNumber];
+                currentAccount.accountNumber = accountNumber;
+                
+                document.getElementById('loginContainer').style.display = 'none';
+                document.getElementById('dashboard').classList.add('active');
+                document.getElementById('userInfo').style.display = 'flex';
+                document.getElementById('userName').textContent = currentAccount.userName;
+                document.getElementById('accountNumber').textContent = accountNumber;
+                
+                // Update dashboard data
+                updateDashboard();
+                
+                alertContainer.innerHTML = '';
+            } else {
+                // Failed login
+                alertContainer.innerHTML = '<div class="alert alert-error">Invalid account number or password. Please try again.</div>';
+            }
+        });
+
+        function updateDashboard() {
+            if (!currentAccount) return;
+            
+            // Update balance and growth
+            document.getElementById('currentBalance').textContent = `₱${currentAccount.currentBalance.toLocaleString()}`;
+            document.getElementById('totalGrowth').textContent = `₱${currentAccount.totalGrowth.toLocaleString()}`;
+            document.getElementById('additionalContributions').textContent = `₱${currentAccount.additionalContributions.toLocaleString()}`;
+            document.getElementById('managementFees').textContent = `₱${currentAccount.managementFees.toLocaleString()}`;
+            
+            // Update vesting progress
+            const vestingProgress = (currentAccount.vestingMonths / 24) * 100;
+            document.getElementById('vestingProgress').style.width = `${vestingProgress}%`;
+            document.getElementById('vestingMonths').textContent = currentAccount.vestingMonths;
+            
+            // Calculate monthly growth
+            const monthlyGrowth = currentAccount.currentBalance * 0.025; // 2.5% monthly target
+            document.getElementById('monthlyGrowth').textContent = `+₱${monthlyGrowth.toFixed(0)}`;
+            
+            // Update transaction history
+            updateTransactionHistory();
+        }
+
+        function updateTransactionHistory() {
+            const transactionList = document.getElementById('transactionList');
+            transactionList.innerHTML = '';
+            
+            // Display last 5 transactions
+            const recentTransactions = currentAccount.transactions.slice(-5).reverse();
+            
+            recentTransactions.forEach(transaction => {
+                const transactionItem = document.createElement('div');
+                transactionItem.className = 'transaction-item';
+                
+                const iconClass = transaction.type === 'deposit' ? 'deposit' : 
+                                 transaction.type === 'growth' ? 'growth' : 'fee';
+                const iconSymbol = transaction.type === 'deposit' ? '💰' : 
+                                  transaction.type === 'growth' ? '📈' : '💸';
+                const amountClass = transaction.amount >= 0 ? 'positive' : 'negative';
+                const amountPrefix = transaction.amount >= 0 ? '+' : '';
+                
+                transactionItem.innerHTML = `
+                    <div class="transaction-details">
+                        <div class="transaction-icon ${iconClass}">${iconSymbol}</div>
+                        <div class="transaction-info">
+                            <h4>${transaction.description}</h4>
+                            <p>${new Date(transaction.date).toLocaleDateString('en-US', { 
+                                year: 'numeric', 
+                                month: 'long', 
+                                day: 'numeric' 
+                            })}</p>
+                        </div>
+                    </div>
+                    <div class="transaction-amount ${amountClass}">${amountPrefix}₱${Math.abs(transaction.amount).toLocaleString()}</div>
+                `;
+                
+                transactionList.appendChild(transactionItem);
+            });
+        }
+
+        function logout() {
+            document.getElementById('dashboard').classList.remove('active');
+            document.getElementById('loginContainer').style.display = 'flex';
+            document.getElementById('userInfo').style.display = 'none';
+            
+            // Clear form and current account
+            document.getElementById('loginForm').reset();
+            document.getElementById('loginAlert').innerHTML = '';
+            currentAccount = null;
+        }
+
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        function downloadStatement() {
+            if (!currentAccount) return;
+            
+            // Generate CSV statement
+            const csvContent = `R2 Solutions - Monthly Statement
+Account Number: ${currentAccount.accountNumber}
+Account Holder: ${currentAccount.userName}
+Email: ${currentAccount.email}
+Statement Date: ${new Date().toLocaleDateString()}
+ResultsCX Start Date: ${currentAccount.resultsCXStartDate}
+Savings Start Date: ${currentAccount.savingsStartDate}
+
+Account Summary:
+Current Balance: ₱${currentAccount.currentBalance.toLocaleString()}
+Initial Deposit: ₱${currentAccount.initialDeposit.toLocaleString()}
+Total Growth: ₱${currentAccount.totalGrowth.toLocaleString()}
+Additional Contributions: ₱${currentAccount.additionalContributions.toLocaleString()}
+Management Fees: ₱${currentAccount.managementFees.toLocaleString()}
+Vesting Progress: ${currentAccount.vestingMonths} of 24 months
+Vesting Status: ${currentAccount.isVested ? 'VESTED' : 'NOT VESTED'}
+
+Transaction History:
+Date,Description,Amount,Balance
+${currentAccount.transactions.map(t => 
+    `${t.date},${t.description},${t.amount >= 0 ? '+' : ''}₱${t.amount.toFixed(2)},₱${t.balance.toFixed(2)}`
+).join('\n')}
 
 *Investment returns are projections only and not guaranteed.
+*Contact: reliable.resource.02@gmail.com for questions.
+`;
 
-Best regards,  
-R2 Solutions Team
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `R2_Statement_${currentAccount.accountNumber}_${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
 
----
+        // Contribution form
+        document.getElementById('contributionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const amount = parseFloat(document.getElementById('contributionAmount').value);
+            
+            if (amount >= 100) {
+                // Update account data
+                demoAccount.additionalContributions += amount;
+                demoAccount.currentBalance += amount;
+                
+                // Update dashboard
+                updateDashboard();
+                
+                // Show success message
+                alert(`Successfully added ₱${amount.toLocaleString()} to your account!`);
+                
+                // Close modal and reset form
+                closeModal('contributionModal');
+                document.getElementById('contributionForm').reset();
+            } else {
+                alert('Minimum contribution is ₱100');
+            }
+        });
 
-## 3. Withdrawal Request Confirmation
+        // Close modals when clicking outside
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.classList.remove('active');
+                }
+            });
+        });
 
-**Subject:** ✅ Withdrawal Request Received - Processing Within 3-5 Days
-
----
-
-**Email Content:**
-
-Dear [CLIENT_NAME],
-
-We've received your withdrawal request and are processing it.
-
-**📤 Withdrawal Details:**
-- Amount Requested: ₱[WITHDRAWAL_AMOUNT]
-- Request Date: [REQUEST_DATE]
-- Reason: [WITHDRAWAL_REASON]
-- Status: Processing
-
-**⏰ Timeline:**
-- Processing: 3-5 business days
-- Funds Transfer: 1-2 business days after approval
-- Total Time: 4-7 business days
-
-**📋 Important Notes:**
-- Only additional contributions and vested amounts can be withdrawn
-- Base ₱2,000 + earnings remain locked until vesting period
-- You'll receive confirmation once funds are transferred
-
-**❓ Questions?**
-Contact us: reliable.resource.02@gmail.com
-
-Best regards,  
-R2 Solutions Team
-
----
-
-## 4. Vesting Milestone Email
-
-**Subject:** 🎊 Congratulations! Your R2 Solutions Account is Fully Vested!
-
----
-
-**Email Content:**
-
-Dear [CLIENT_NAME],
-
-🎉 **CONGRATULATIONS!** Your R2 Solutions savings account has reached full vesting!
-
-**🏆 Vesting Achievement:**
-- Vesting Date: [VESTING_DATE]
-- Total Vested Amount: ₱[VESTED_AMOUNT]
-- Initial Investment: ₱2,000
-- Total Growth: ₱[TOTAL_GROWTH]
-- Return on Investment: [ROI_PERCENTAGE]%
-
-**💰 What This Means:**
-- Your entire balance is now fully accessible
-- You can withdraw any amount anytime
-- Continue growing your savings with additional contributions
-- No more vesting restrictions
-
-**🚀 Continue Growing:**
-Your account remains active and continues to grow monthly. Consider:
-- Adding regular contributions to build wealth
-- Using this as your emergency fund
-- Planning your next financial goals
-
-**📱 Next Steps:**
-- Login to your account to see your vested status
-- Request withdrawals anytime if needed
-- Continue monitoring your monthly growth
-
-Login here: https://yourusername.github.io/r2-savings-portal
-
-Thank you for trusting R2 Solutions with your financial future!
-
-Best regards,  
-R2 Solutions Team
-
----
-
-## 5. Support/Contact Email
-
-**Subject:** 📞 R2 Solutions Support - Your Question About [TOPIC]
-
----
-
-**Email Content:**
-
-Dear [CLIENT_NAME],
-
-Thank you for contacting R2 Solutions support regarding [TOPIC].
-
-**📋 Your Inquiry:**
-[CLIENT_QUESTION]
-
-**💡 Our Response:**
-[SUPPORT_RESPONSE]
-
-**📱 Additional Resources:**
-- Account Portal: https://yourusername.github.io/r2-savings-portal
-- Email Support: reliable.resource.02@gmail.com
-- Business Hours: Monday-Friday, 9:00 AM - 6:00 PM PST
-
-**❓ Still Have Questions?**
-Feel free to reply to this email or contact us directly.
-
-Best regards,  
-R2 Solutions Support Team
-
----
-
-## 📝 How to Use These Templates:
-
-### Variables to Replace:
-- `[CLIENT_NAME]` - Client's full name
-- `[ACCOUNT_NUMBER]` - Their account number (R2-2024-XXX)
-- `[PASSWORD]` - Their generated password
-- `[CURRENT_BALANCE]` - Current account balance
-- `[MONTHLY_GROWTH]` - Monthly growth amount
-- `[MONTHS_COMPLETED]` - Vesting progress
-- `[WITHDRAWAL_AMOUNT]` - Requested withdrawal amount
-- All other bracketed variables as needed
-
-### Email Automation Tips:
-1. **Save as templates** in your email client
-2. **Use mail merge** for bulk monthly statements
-3. **Set calendar reminders** for monthly statements
-4. **Create email rules** for automatic organization
-5. **Keep records** of all sent communications
-
-### Professional Touches:
-- Use your business email signature
-- Include R2 Solutions logo if available
-- Maintain consistent formatting
-- Send from reliable.resource.02@gmail.com
-- Always include disclaimers about investment risks
+        // Initialize with demo data on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateDashboard();
+        });
+    </script>
+</body>
+</html>
