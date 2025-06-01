@@ -105,7 +105,7 @@
             color: #333;
         }
 
-        input {
+        input, textarea {
             width: 100%;
             padding: 12px 16px;
             border: 2px solid #e1e5e9;
@@ -114,10 +114,15 @@
             transition: all 0.3s ease;
         }
 
-        input:focus {
+        input:focus, textarea:focus {
             outline: none;
             border-color: #4facfe;
             box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
         }
 
         .btn {
@@ -295,9 +300,9 @@
             color: #004085;
         }
 
-        .transaction-icon.fee {
-            background: #f8d7da;
-            color: #721c24;
+        .transaction-icon.contribution {
+            background: #e7f3ff;
+            color: #0066cc;
         }
 
         .transaction-info h4 {
@@ -452,6 +457,24 @@
             color: #856404;
         }
 
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
         @media (max-width: 768px) {
             .dashboard-grid {
                 grid-template-columns: 1fr;
@@ -474,24 +497,6 @@
                 font-size: 2.5em;
             }
         }
-
-        .alert {
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-
-        .alert-success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-
-        .alert-error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
     </style>
 </head>
 <body>
@@ -501,89 +506,6 @@
             <div class="logo">
                 <h1>💰 R2 Solutions</h1>
             </div>
-
-    <!-- Withdrawal Request Modal -->
-    <div class="modal" id="withdrawalModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>💸 Withdrawal Request</h3>
-                <button class="close-btn" onclick="closeModal('withdrawalModal')">&times;</button>
-            </div>
-            <div id="withdrawalInfo">
-                <div style="background: #e7f3ff; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
-                    <h4>Available for Withdrawal:</h4>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px;">
-                        <div>
-                            <strong>Additional Contributions:</strong><br>
-                            <span style="color: #28a745; font-size: 1.2em;">₱<span id="availableContributions">0</span></span>
-                        </div>
-                        <div>
-                            <strong>Vested Base + Earnings:</strong><br>
-                            <span style="color: #6c757d; font-size: 1.2em;" id="vestedAmount">₱0 (Not vested yet)</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <form id="withdrawalForm">
-                    <div class="form-group">
-                        <label for="withdrawalAmount">Withdrawal Amount</label>
-                        <input type="number" id="withdrawalAmount" placeholder="Enter amount" min="100" required>
-                        <small style="color: #666;">Minimum withdrawal: ₱100</small>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="withdrawalReason">Reason for Withdrawal (Optional)</label>
-                        <textarea id="withdrawalReason" placeholder="Emergency, investment, etc." rows="3"></textarea>
-                    </div>
-                    
-                    <div class="disclaimer">
-                        <p><strong>Important Notes:</strong></p>
-                        <ul style="margin-left: 20px; margin-top: 5px;">
-                            <li>Only additional contributions and vested amounts can be withdrawn</li>
-                            <li>Base ₱2,000 + earnings are locked until 2-year vesting period</li>
-                            <li>Withdrawal requests processed within 3-5 business days</li>
-                            <li>You'll receive email confirmation once approved</li>
-                        </ul>
-                    </div>
-                    
-                    <button type="submit" class="btn">Submit Withdrawal Request</button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Support Modal -->
-    <div class="modal" id="supportModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>📞 Contact Support</h3>
-                <button class="close-btn" onclick="closeModal('supportModal')">&times;</button>
-            </div>
-            <div style="text-align: center;">
-                <p style="margin-bottom: 20px;">Need help with your R2 Solutions savings account?</p>
-                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
-                    <h4>📧 Email Support</h4>
-                    <p><strong>reliable.resource.02@gmail.com</strong></p>
-                    <p style="font-size: 0.9em; color: #666;">Response within 24 hours</p>
-                </div>
-                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
-                    <h4>⏰ Business Hours</h4>
-                    <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
-                    <p style="font-size: 0.9em; color: #666;">Philippine Standard Time</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Contact Support Action Card -->
-    <div style="display: none;">
-        <div class="action-card">
-            <div class="action-icon">📞</div>
-            <h3>Contact Support</h3>
-            <p>Get help with your account or have questions answered</p>
-            <button class="btn-secondary" onclick="openModal('supportModal')">Contact Us</button>
-        </div>
-    </div>
             <div class="user-info" id="userInfo" style="display: none;">
                 <span>Welcome, <strong id="userName"></strong></span>
                 <span>|</span>
@@ -673,46 +595,7 @@
                 <button class="btn-secondary" onclick="downloadStatement()">Download Statement</button>
             </div>
             <div id="transactionList">
-                <div class="transaction-item">
-                    <div class="transaction-details">
-                        <div class="transaction-icon deposit">💰</div>
-                        <div class="transaction-info">
-                            <h4>Initial Deposit</h4>
-                            <p>June 15, 2024 • R2 Solutions</p>
-                        </div>
-                    </div>
-                    <div class="transaction-amount positive">+₱2,000.00</div>
-                </div>
-                <div class="transaction-item">
-                    <div class="transaction-details">
-                        <div class="transaction-icon growth">📈</div>
-                        <div class="transaction-info">
-                            <h4>Monthly Growth</h4>
-                            <p>November 30, 2024 • 2.3% return</p>
-                        </div>
-                    </div>
-                    <div class="transaction-amount positive">+₱54.32</div>
-                </div>
-                <div class="transaction-item">
-                    <div class="transaction-details">
-                        <div class="transaction-icon growth">📈</div>
-                        <div class="transaction-info">
-                            <h4>Monthly Growth</h4>
-                            <p>October 31, 2024 • 2.1% return</p>
-                        </div>
-                    </div>
-                    <div class="transaction-amount positive">+₱48.90</div>
-                </div>
-                <div class="transaction-item">
-                    <div class="transaction-details">
-                        <div class="transaction-icon growth">📈</div>
-                        <div class="transaction-info">
-                            <h4>Monthly Growth</h4>
-                            <p>September 30, 2024 • 2.7% return</p>
-                        </div>
-                    </div>
-                    <div class="transaction-amount positive">+₱61.15</div>
-                </div>
+                <!-- Dynamic content -->
             </div>
         </div>
 
@@ -775,6 +658,56 @@
         </div>
     </div>
 
+    <!-- Withdrawal Request Modal -->
+    <div class="modal" id="withdrawalModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>💸 Withdrawal Request</h3>
+                <button class="close-btn" onclick="closeModal('withdrawalModal')">&times;</button>
+            </div>
+            <div id="withdrawalInfo">
+                <div style="background: #e7f3ff; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+                    <h4>Available for Withdrawal:</h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px;">
+                        <div>
+                            <strong>Additional Contributions:</strong><br>
+                            <span style="color: #28a745; font-size: 1.2em;">₱<span id="availableContributions">0</span></span>
+                        </div>
+                        <div>
+                            <strong>Vested Base + Earnings:</strong><br>
+                            <span style="color: #6c757d; font-size: 1.2em;" id="vestedAmount">₱0 (Not vested yet)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <form id="withdrawalForm">
+                    <div class="form-group">
+                        <label for="withdrawalAmount">Withdrawal Amount</label>
+                        <input type="number" id="withdrawalAmount" placeholder="Enter amount" min="100" required>
+                        <small style="color: #666;">Minimum withdrawal: ₱100</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="withdrawalReason">Reason for Withdrawal (Optional)</label>
+                        <textarea id="withdrawalReason" placeholder="Emergency, investment, etc." rows="3"></textarea>
+                    </div>
+                    
+                    <div class="disclaimer">
+                        <p><strong>Important Notes:</strong></p>
+                        <ul style="margin-left: 20px; margin-top: 5px;">
+                            <li>Only additional contributions and vested amounts can be withdrawn</li>
+                            <li>Base ₱2,000 + earnings are locked until 2-year vesting period</li>
+                            <li>Withdrawal requests processed within 3-5 business days</li>
+                            <li>You'll receive email confirmation once approved</li>
+                        </ul>
+                    </div>
+                    
+                    <button type="submit" class="btn">Submit Withdrawal Request</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <!-- Support Modal -->
     <div class="modal" id="supportModal">
         <div class="modal-content">
@@ -806,7 +739,7 @@
                 userName: 'Juan dela Cruz',
                 email: 'juan.delacruz@email.com',
                 resultsCXStartDate: '2024-06-15',
-                savingsStartDate: '2024-10-15', // After 120 days
+                savingsStartDate: '2024-10-15',
                 currentBalance: 2456.37,
                 initialDeposit: 2000,
                 totalGrowth: 456.37,
@@ -870,9 +803,7 @@
             const password = document.getElementById('passwordInput').value;
             const alertContainer = document.getElementById('loginAlert');
             
-            // Check if account exists and password matches
             if (clientAccounts[accountNumber] && clientAccounts[accountNumber].password === password) {
-                // Successful login
                 currentAccount = clientAccounts[accountNumber];
                 currentAccount.accountNumber = accountNumber;
                 
@@ -882,12 +813,9 @@
                 document.getElementById('userName').textContent = currentAccount.userName;
                 document.getElementById('accountNumber').textContent = accountNumber;
                 
-                // Update dashboard data
                 updateDashboard();
-                
                 alertContainer.innerHTML = '';
             } else {
-                // Failed login
                 alertContainer.innerHTML = '<div class="alert alert-error">Invalid account number or password. Please try again.</div>';
             }
         });
@@ -895,22 +823,18 @@
         function updateDashboard() {
             if (!currentAccount) return;
             
-            // Update balance and growth
             document.getElementById('currentBalance').textContent = `₱${currentAccount.currentBalance.toLocaleString()}`;
             document.getElementById('totalGrowth').textContent = `₱${currentAccount.totalGrowth.toLocaleString()}`;
             document.getElementById('additionalContributions').textContent = `₱${currentAccount.additionalContributions.toLocaleString()}`;
             document.getElementById('managementFees').textContent = `₱${currentAccount.managementFees.toLocaleString()}`;
             
-            // Update vesting progress
             const vestingProgress = (currentAccount.vestingMonths / 24) * 100;
             document.getElementById('vestingProgress').style.width = `${vestingProgress}%`;
             document.getElementById('vestingMonths').textContent = currentAccount.vestingMonths;
             
-            // Calculate monthly growth
-            const monthlyGrowth = currentAccount.currentBalance * 0.025; // 2.5% monthly target
+            const monthlyGrowth = currentAccount.currentBalance * 0.025;
             document.getElementById('monthlyGrowth').textContent = `+₱${monthlyGrowth.toFixed(0)}`;
             
-            // Update transaction history
             updateTransactionHistory();
         }
 
@@ -918,7 +842,6 @@
             const transactionList = document.getElementById('transactionList');
             transactionList.innerHTML = '';
             
-            // Display last 5 transactions
             const recentTransactions = currentAccount.transactions.slice(-5).reverse();
             
             recentTransactions.forEach(transaction => {
@@ -926,9 +849,9 @@
                 transactionItem.className = 'transaction-item';
                 
                 const iconClass = transaction.type === 'deposit' ? 'deposit' : 
-                                 transaction.type === 'growth' ? 'growth' : 'fee';
+                                 transaction.type === 'growth' ? 'growth' : 'contribution';
                 const iconSymbol = transaction.type === 'deposit' ? '💰' : 
-                                  transaction.type === 'growth' ? '📈' : '💸';
+                                  transaction.type === 'growth' ? '📈' : '💵';
                 const amountClass = transaction.amount >= 0 ? 'positive' : 'negative';
                 const amountPrefix = transaction.amount >= 0 ? '+' : '';
                 
@@ -956,7 +879,6 @@
             document.getElementById('loginContainer').style.display = 'flex';
             document.getElementById('userInfo').style.display = 'none';
             
-            // Clear form and current account
             document.getElementById('loginForm').reset();
             document.getElementById('loginAlert').innerHTML = '';
             currentAccount = null;
@@ -964,6 +886,19 @@
 
         function openModal(modalId) {
             document.getElementById(modalId).classList.add('active');
+            
+            if (modalId === 'withdrawalModal' && currentAccount) {
+                document.getElementById('availableContributions').textContent = currentAccount.additionalContributions.toLocaleString();
+                
+                const vestedAmountElement = document.getElementById('vestedAmount');
+                if (currentAccount.isVested) {
+                    const vestedAmount = currentAccount.initialDeposit + currentAccount.totalGrowth;
+                    vestedAmountElement.innerHTML = `<span style="color: #28a745;">₱${vestedAmount.toLocaleString()}</span>`;
+                } else {
+                    const monthsRemaining = 24 - currentAccount.vestingMonths;
+                    vestedAmountElement.innerHTML = `<span style="color: #6c757d;">₱0 (${monthsRemaining.toFixed(1)} months remaining)</span>`;
+                }
+            }
         }
 
         function closeModal(modalId) {
@@ -973,7 +908,6 @@
         function downloadStatement() {
             if (!currentAccount) return;
             
-            // Generate CSV statement
             const csvContent = `R2 Solutions - Monthly Statement
 Account Number: ${currentAccount.accountNumber}
 Account Holder: ${currentAccount.userName}
@@ -1017,21 +951,48 @@ ${currentAccount.transactions.map(t =>
             const amount = parseFloat(document.getElementById('contributionAmount').value);
             
             if (amount >= 100) {
-                // Update account data
-                demoAccount.additionalContributions += amount;
-                demoAccount.currentBalance += amount;
+                currentAccount.additionalContributions += amount;
+                currentAccount.currentBalance += amount;
                 
-                // Update dashboard
+                const today = new Date().toISOString().split('T')[0];
+                currentAccount.transactions.push({
+                    date: today,
+                    type: 'contribution',
+                    description: 'Additional Contribution',
+                    amount: amount,
+                    balance: currentAccount.currentBalance
+                });
+                
                 updateDashboard();
-                
-                // Show success message
                 alert(`Successfully added ₱${amount.toLocaleString()} to your account!`);
                 
-                // Close modal and reset form
                 closeModal('contributionModal');
                 document.getElementById('contributionForm').reset();
             } else {
                 alert('Minimum contribution is ₱100');
+            }
+        });
+
+        // Withdrawal form
+        document.getElementById('withdrawalForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const amount = parseFloat(document.getElementById('withdrawalAmount').value);
+            const reason = document.getElementById('withdrawalReason').value;
+            const availableAmount = currentAccount.additionalContributions + (currentAccount.isVested ? (currentAccount.initialDeposit + currentAccount.totalGrowth) : 0);
+            
+            if (amount > availableAmount) {
+                alert(`Insufficient available funds. You can withdraw up to ₱${availableAmount.toLocaleString()}`);
+                return;
+            }
+            
+            if (amount >= 100) {
+                alert(`Withdrawal request for ₱${amount.toLocaleString()} has been submitted successfully! You'll receive an email confirmation within 24 hours.`);
+                
+                closeModal('withdrawalModal');
+                document.getElementById('withdrawalForm').reset();
+            } else {
+                alert('Minimum withdrawal is ₱100');
             }
         });
 
@@ -1044,7 +1005,7 @@ ${currentAccount.transactions.map(t =>
             });
         });
 
-        // Initialize with demo data on page load
+        // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
             updateDashboard();
         });
