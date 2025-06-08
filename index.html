@@ -794,8 +794,6 @@
         </div>
     </section>
 
-    </section>
-
     <!-- Authentication Modals -->
     <!-- Login Modal -->
     <div id="loginModal" class="modal">
@@ -1180,8 +1178,46 @@
             }
         });
 
+        // Updated logout handler - Connected to Django Backend
+        document.getElementById('logoutBtn').addEventListener('click', async function(e) {
+            e.preventDefault();
+            try {
+                const refreshToken = localStorage.getItem('refreshToken');
+                
+                if (refreshToken) {
+                    await fetch(`${API_BASE_URL}/auth/logout/`, {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            refresh_token: refreshToken
+                        })
+                    });
+                }
+
+                // Clear local storage
+                localStorage.removeItem('accessToken');
+                localStorage.removeItem('refreshToken');
+                localStorage.removeItem('user');
+                
+                currentUser = null;
+                hideDashboard();
+                showAlert('You have been logged out successfully.', 'success');
+            } catch (error) {
+                console.error('Logout error:', error);
+                // Force logout anyway
+                localStorage.removeItem('accessToken');
+                localStorage.removeItem('refreshToken');
+                localStorage.removeItem('user');
+                currentUser = null;
+                hideDashboard();
+                showAlert('Logged out', 'success');
+            }
+        });
+
         // Dashboard functionality
-        // Updated dashboard population function
         function showDashboard() {
             // Hide main sections
             document.getElementById('home').style.display = 'none';
@@ -1229,45 +1265,6 @@
             document.getElementById('dashboardBtn').style.display = 'none';
             document.getElementById('logoutBtn').style.display = 'none';
         }
-
-        // Updated logout handler - Connected to Django Backend
-        document.getElementById('logoutBtn').addEventListener('click', async function(e) {
-            e.preventDefault();
-            try {
-                const refreshToken = localStorage.getItem('refreshToken');
-                
-                if (refreshToken) {
-                    await fetch(`${API_BASE_URL}/auth/logout/`, {
-                        method: 'POST',
-                        headers: {
-                            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            refresh_token: refreshToken
-                        })
-                    });
-                }
-
-                // Clear local storage
-                localStorage.removeItem('accessToken');
-                localStorage.removeItem('refreshToken');
-                localStorage.removeItem('user');
-                
-                currentUser = null;
-                hideDashboard();
-                showAlert('You have been logged out successfully.', 'success');
-            } catch (error) {
-                console.error('Logout error:', error);
-                // Force logout anyway
-                localStorage.removeItem('accessToken');
-                localStorage.removeItem('refreshToken');
-                localStorage.removeItem('user');
-                currentUser = null;
-                hideDashboard();
-                showAlert('Logged out', 'success');
-            }
-        });
 
         // Dashboard button
         document.getElementById('dashboardBtn').addEventListener('click', (e) => {
@@ -1318,15 +1315,53 @@
                 });
             }, 100);
         }
+
+        // Check authentication status on page load - Connected to Django Backend
+        window.addEventListener('DOMContentLoaded', async () => {
+            const accessToken = localStorage.getItem('accessToken');
+            const userStr = localStorage.getItem('user');
+            
+            if (accessToken && userStr) {
+                try {
+                    // Verify token is still valid by fetching profile
+                    const response = await fetch(`${API_BASE_URL}/auth/profile/`, {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Bearer ${accessToken}`,
+                            'Content-Type': 'application/json',
+                        }
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        currentUser = data.user;
+                        showDashboard();
+                    } else {
+                        // Token is invalid, clear storage
+                        localStorage.removeItem('accessToken');
+                        localStorage.removeItem('refreshToken');
+                        localStorage.removeItem('user');
+                    }
+                } catch (error) {
+                    console.log('Session check failed, user logged out');
+                    localStorage.removeItem('accessToken');
+                    localStorage.removeItem('refreshToken');
+                    localStorage.removeItem('user');
+                }
+            }
+        });
+
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
             });
         });
 
@@ -1360,7 +1395,7 @@
         });
 
         // Form submission handler
-        document.querySelector('form').addEventListener('submit', function(e) {
+        document.querySelector('#contact form').addEventListener('submit', function(e) {
             e.preventDefault();
             
             // Simple form validation and submission feedback
@@ -1370,7 +1405,7 @@
             
             if (name && email) {
                 // Show success message (in a real scenario, you'd send this to a server)
-                alert(`Thank you, ${name}! We've received your inquiry and will contact you within 24 hours.`);
+                showAlert(`Thank you, ${name}! We've received your inquiry and will contact you within 24 hours.`, 'success');
                 this.reset();
             }
         });
