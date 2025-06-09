@@ -107,7 +107,7 @@
             color: #fcbf01 !important;
         }
 
-        /* Mobile Menu Toggle */
+        /* Mobile Menu Toggle - NEW ADDITION */
         .mobile-menu-toggle {
             display: none;
             flex-direction: column;
@@ -460,7 +460,7 @@
             border-top: 2px solid #fcbf01;
         }
 
-        /* Mobile Responsiveness */
+        /* Mobile Responsiveness - UPDATED */
         @media (max-width: 768px) {
             .mobile-menu-toggle {
                 display: flex;
@@ -503,19 +503,6 @@
                 font-size: 2.5rem;
             }
 
-            .hero p {
-                font-size: 1.1rem;
-                padding: 0 1rem;
-            }
-
-            .logo {
-                font-size: 1.5rem;
-            }
-
-            .container {
-                padding: 0 15px;
-            }
-
             .about-content {
                 grid-template-columns: 1fr;
             }
@@ -526,25 +513,6 @@
 
             .stats {
                 grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-            }
-
-            .cta-button {
-                padding: 12px 30px;
-                font-size: 0.9rem;
-            }
-
-            .logo {
-                font-size: 1.3rem;
             }
         }
 
@@ -800,7 +768,7 @@
         <nav class="container">
             <div class="logo">R2 Solutions</div>
             
-            <!-- Mobile menu toggle -->
+            <!-- Mobile menu toggle - NEW ADDITION -->
             <div class="mobile-menu-toggle" id="mobileMenuToggle">
                 <span></span>
                 <span></span>
@@ -907,6 +875,33 @@
             </div>
             <div class="modal-body">
                 <form class="auth-form" id="loginForm">
+                    <div class="auth-form-group">
+                        <label for="loginEmail">Email Address</label>
+                        <input type="email" id="loginEmail" name="email" required>
+                    </div>
+                    <div class="auth-form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" name="password" required>
+                    </div>
+                    <button type="submit" class="auth-submit-btn">Sign In</button>
+                </form>
+                <div class="auth-switch">
+                    Don't have an account? <a href="#" id="switchToRegister">Create one here</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" data-modal="registerModal">&times;</span>
+                <h2>Join R2 Solutions</h2>
+                <p style="margin: 0.5rem 0 0 0; color: white; opacity: 0.9;">Create your account to get started</p>
+            </div>
+            <div class="modal-body">
+                <form class="auth-form" id="registerForm">
                     <div class="auth-form-group">
                         <label for="registerName">Full Name</label>
                         <input type="text" id="registerName" name="name" required>
@@ -1089,7 +1084,7 @@
         let currentUser = null;
         const API_BASE_URL = 'https://web-production-da645.up.railway.app/api';
 
-        // Mobile menu toggle
+        // Mobile menu toggle - NEW ADDITION
         const mobileMenuToggle = document.getElementById('mobileMenuToggle');
         const navLinks = document.getElementById('navLinks');
 
@@ -1558,30 +1553,3 @@
     </script>
 </body>
 </html>
-                        <label for="loginEmail">Email Address</label>
-                        <input type="email" id="loginEmail" name="email" required>
-                    </div>
-                    <div class="auth-form-group">
-                        <label for="loginPassword">Password</label>
-                        <input type="password" id="loginPassword" name="password" required>
-                    </div>
-                    <button type="submit" class="auth-submit-btn">Sign In</button>
-                </form>
-                <div class="auth-switch">
-                    Don't have an account? <a href="#" id="switchToRegister">Create one here</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Register Modal -->
-    <div id="registerModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="close" data-modal="registerModal">&times;</span>
-                <h2>Join R2 Solutions</h2>
-                <p style="margin: 0.5rem 0 0 0; color: white; opacity: 0.9;">Create your account to get started</p>
-            </div>
-            <div class="modal-body">
-                <form class="auth-form" id="registerForm">
-                    <div class="auth-form-group">
